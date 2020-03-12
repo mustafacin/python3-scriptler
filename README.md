@@ -4,8 +4,9 @@
 
 <h1> Kullanımı </h1>
 
-<h3>chmod 777 "program.py"
 <h3> sudo pip3 install python-nmap </h3>
+<h3>chmod 777 "program.py"
+
 
 <h3> sudo python3 "program.py" </h3>
 <h4> Buradaki program.py dosyasını hangi toolu kullanıyorsanız. ona göre değişmektedir.
