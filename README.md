@@ -9,4 +9,4 @@
 
 
 <h3> sudo python3 "program.py" </h3>
-<h4> Buradaki program.py dosyasını hangi toolu kullanıyorsanız. ona göre değişmektedir.
+<h4> (Buradaki program.py dosyasını hangi toolu kullanıyorsanız. ona göre değişmektedir.)</h4>
