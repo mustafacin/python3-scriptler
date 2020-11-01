@@ -1,16 +1,28 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
+
+import scapy.all as scapy
+
+def scan(ip):
+    arp_request = scapy.ARP(pdst=ip)
+    broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
+    arp_request_broadcast = broadcast/arp_request
+    answered_list = scapy.srp(arp_request_broadcast, timeout=1)[0]
+    client_list = []
+
+    for element in answered_list:
+        client_dict = {"ip": element[1].psrc, "mac": element[1].hwsrc}
+        client_list.append(client_dict)
+    return client_list
 
 
-import socket
-ip_adres = input("Hedef ip adresini giriniz.")
-port_listesi = [21,22,23,80,88,139,445,443,3306,8080]
-#isterseniz bu port listesini degistirerek daha genis bir tarama yapabilirsiniz.
+def cikti_sonucu(sonuc_list):
+    print("IP ADDRESS\t\tMAC ADDRESS\n--------------------------------------------")
+    for sonuc in sonuc_list:
+        print(sonuc["ip"]+"\t\t"+sonuc["mac"])
 
 
-for port in port_listesi:
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    cikti = s.connect_ex((ip_adres,port))
 
-    if cikti == 0:
-        print("Port ", port ," aciktir.")
-
+ip = input("Taramak istediginiz ip adresi araliginin varsayilan ag gecidini giriniz: ")
+ip = ip+"/24"
+sonuc = scan(ip)
+cikti_sonucu(sonuc)
